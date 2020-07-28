@@ -1,11 +1,19 @@
 import React from 'react';
+import STORE from './dummy-store';
 
-function App() {
-  return (
-    <main className='App'>
-      {/* content goes here */}
-    </main>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = STORE;
+  }
+
+  render() {    
+    return (
+      <main className='App'>
+        {/* content goes here */}
+      </main>
+    );
+  }
 }
 
 export default App;
