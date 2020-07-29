@@ -44,8 +44,10 @@ header {
   padding: 1em;
   display: flex;
   flex-direction: column;
+  align-content: space-around;
 }
 
 .Note_note-item button {
   align-self: flex-end;
+  display: inline-flex;
 }
