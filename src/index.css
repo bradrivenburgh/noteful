@@ -11,3 +11,41 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+header {
+  text-align: center;
+}
+
+.App_wrapper {
+
+}
+
+.App_main-content {
+  display: flex;
+  justify-content: center;
+
+}
+
+.Main_main-view {
+  flex: 2;
+  padding: 1em;
+  border: 1px solid black;
+}
+
+.SideBar_main-view {
+  flex: 1;
+  border: 1px solid black;
+  padding: 1em;
+}
+
+.Note_note-item {
+  border: 1px solid black;
+  margin: 1em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.Note_note-item button {
+  align-self: flex-end;
+}
