@@ -16,10 +16,6 @@ header {
   text-align: center;
 }
 
-.App_wrapper {
-
-}
-
 .App_main-content {
   display: flex;
   justify-content: center;
@@ -55,6 +51,9 @@ header {
   align-content: space-around;
 }
 
+.selected {
+  background-color: gray;
+}
 
 .Note_note-list {
   list-style-type: none;
@@ -68,7 +67,7 @@ header {
 .Note_note-item {
   border: 1px solid black;
   margin: 1em;
-  padding: 1em;
+  padding: 0 1em;
   display: flex;
   flex-direction: column;
   align-content: space-around;

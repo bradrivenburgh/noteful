@@ -7,8 +7,10 @@ function SideBarMain({folders}) {
       <li key={folder.id} className="SideBar_folder-item">
         <NavLink 
           to={`/folders/${folder.id}`}
-        />
-        {folder.name}
+          activeClassName="selected"
+        >
+          <h4>{folder.name}</h4>
+        </NavLink>
       </li>
     );
   })
@@ -17,12 +19,6 @@ function SideBarMain({folders}) {
       <ul className="SideBar_folder-list">
         {allFolders}
       </ul>
-      <div >
-        <button>Add Folder</button>
-        <p>Main route: list of all folders (as buttons)</p>
-        <p>Folder route: list of this.props.folders with one selected</p>
-        <p>Note route: only show the "go back" button</p>
-      </div>
     </section>
   );
 }

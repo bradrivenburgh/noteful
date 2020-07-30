@@ -1,8 +1,9 @@
 import React from 'react';
 import NoteMain from '../note/NoteMain';
 
-function MainNoteList({ notes }) {
-  const allNotes = notes.map(note => {
+function FilteredNoteList({ notes, routerProps}) {
+  const filteredByFolderId = notes.filter(note => note.folderId === routerProps.match.params.folderId)
+  const filteredNotes = filteredByFolderId.map(note => {
     return (
       <li key={note.id}>
         <NoteMain note={note}/>
@@ -12,7 +13,7 @@ function MainNoteList({ notes }) {
   return (
     <section>
       <ul className="Note_note-list">
-        {allNotes}      
+        {filteredNotes}      
       </ul>
       <div>
         <button>Add Note</button>
@@ -21,6 +22,6 @@ function MainNoteList({ notes }) {
   );
 }
 
-MainNoteList.defaultProps = {notes: []};
+FilteredNoteList.defaultProps = {notes: []};
 
-export default MainNoteList;
+export default FilteredNoteList;
