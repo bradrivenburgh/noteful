@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import STORE from './dummy-store';
-import Main from './main/Main'
-import SideBar from './sidebar/SideBar';
+import MainNoteList from './main/MainNoteList'
+import SideBarMain from './sidebar/SideBarMain';
 
 class App extends React.Component {
   constructor() {
@@ -19,12 +19,12 @@ class App extends React.Component {
         <main className='App_main-content'>
           <div className="SideBar_main-view">
             <Route exact path='/' render={() => 
-                <SideBar folders={this.state.folders} />               
+                <SideBarMain folders={this.state.folders} />               
             }/>
           </div>
           <div className='Main_main-view'>
             <Route exact path='/' render={() => 
-                <Main notes={this.state.notes}/>               
+                <MainNoteList notes={this.state.notes}/>               
             }/>
           </div>
         </main>

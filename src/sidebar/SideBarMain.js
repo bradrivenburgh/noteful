@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SideBar() {
+function SideBarMain() {
   return (
     <div >
       <p>Main route: list of all folders (as buttons)</p>
@@ -10,4 +10,4 @@ function SideBar() {
   );
 }
 
-export default SideBar;
+export default SideBarMain;
