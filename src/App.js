@@ -3,6 +3,7 @@ import { Route, Link } from 'react-router-dom';
 import STORE from './dummy-store';
 import MainNoteList from './main/MainNoteList';
 import FilteredNoteList from './main/FilteredNoteList';
+import SingleNoteList from './main/SingleNoteList';
 import SideBarMain from './sidebar/SideBarMain';
 import SideBarNote from './sidebar/SideBarNote';
 
@@ -15,6 +16,10 @@ class App extends React.Component {
   singleNote = (routerProps) => {
     return STORE.notes.find(note => note.id === routerProps.match.params.noteId)
   }
+
+  singleFolder = ((routerProps, note) => {
+    return this.state.folders.find(folder => folder.id === note.folderId)
+  })
 
   render() {    
     return (
@@ -41,7 +46,9 @@ class App extends React.Component {
                 <SideBarMain folders={this.state.folders} />
               </div>
               <div className="Main_main-view">
-                <FilteredNoteList notes={this.state.notes} routerProps={routerProps}/>               
+                <FilteredNoteList 
+                  notes={this.state.notes} 
+                  routerProps={routerProps}/>               
               </div>
             </>
           }/>
@@ -49,10 +56,15 @@ class App extends React.Component {
             path='/notes/:noteId' render={(routerProps) => 
             <>
               <div className="SideBar_main-view">
-                <SideBarNote onClickBack={() => routerProps.history.goBack()} />
+                <SideBarNote
+                  folder={this.singleFolder(routerProps, this.singleNote(routerProps))}
+                  routerProps={routerProps} 
+                />
               </div>
               <div className="Main_main-view">
-                <FilteredNoteList note={this.singleNote(routerProps)} routerProps={routerProps}/>               
+                <SingleNoteList
+                  note={this.singleNote(routerProps)} 
+                  routerProps={routerProps}/>               
               </div>
             </>
           }
