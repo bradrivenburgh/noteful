@@ -21,4 +21,6 @@ function MainNoteList({ notes }) {
   );
 }
 
+MainNoteList.defaultProps = {notes: []};
+
 export default MainNoteList;
