@@ -25,7 +25,7 @@ class App extends React.Component {
     return (
       <div className='App_wrapper'>
         <header>
-          <Link to={'/'}>            
+          <Link to='/'>            
           <h1>Noteful</h1>
           </Link>
         </header>
