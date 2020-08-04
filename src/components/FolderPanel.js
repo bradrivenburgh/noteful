@@ -5,7 +5,7 @@ import { NavLink, useHistory, useParams, useRouteMatch } from 'react-router-dom'
 function FolderPanel() {
   // Get folders object from context and then destructure it
   // so we are only left with the array.
-  const {folders} = useContext(NotefulContext);
+  const {folders, selectedNote} = useContext(NotefulContext);
   const {folders: foldersArr} = folders;
 
   //Make a list of all folders for the "/" path
@@ -22,19 +22,35 @@ function FolderPanel() {
     );
   });
 
-  // Experimenting with getting the right info
-  const {noteId} = useParams()
-  const match = useRouteMatch();
-  console.log(match);
-  const singleFolder = foldersArr.find(folder => folder.id === noteId)
+  // Pull the selectedNote value from context and compare its
+  // folderId with the folderIds in the folders array
+  let singleFolder = foldersArr
+    .find(folder => folder.id === selectedNote.folderId) || {};
+  console.log(singleFolder)
 
   const history = useHistory();
+
+  const handleClick = () => {
+    singleFolder = {};
+    history.push("/");
+  }
+  
   console.log(history)
+  console.log(singleFolder)
+  const noteView = (
+    <>
+      <button onClick={handleClick}>Go Back</button>
+      <h2>{singleFolder.name}</h2>
+    </>
+  );
 
   return (
     <section className="FolderPanel_main-view">
       <ul className="FolderPanel_folder-list">
-        {allFolders}
+        {Object.keys(singleFolder).length
+        ? noteView
+        : allFolders}
+
       </ul>
     </section>
   );
@@ -44,7 +60,6 @@ FolderPanel.defaultProps = {
   history: {},
   folders: {},
   foldersArr: [],
-  singleFolder: {}, 
   allFolders: [],
   noteId: "",
   

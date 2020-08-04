@@ -7,6 +7,7 @@ import { routes } from './routes';
 function App() {
   const [folders, setFolders] = useState(STORE.folders);
   const [notes, setNotes] = useState(STORE.notes);
+  const [selectedNote, setSelectedNote] = useState({})
 
   const routeList = routes.map((route, index) => (
     <Route 
@@ -21,7 +22,7 @@ function App() {
       }
     />
   ))
-
+  
   return (
     <>
       <header>
@@ -34,6 +35,9 @@ function App() {
           value={{
             folders: {folders},
             notes: {notes},
+            selectedNote: selectedNote,
+            setSelectedNote
+            
           }}
         >
           <Switch>

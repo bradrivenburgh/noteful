@@ -13,7 +13,9 @@ function MainPanel() {
   const allNotes = notesArr.map(note => {
     return (
       <li key={note.id}>
-        <Note note={note}/>
+        <Note 
+          note={note}
+        />
       </li>
     );
   });
@@ -27,16 +29,19 @@ function MainPanel() {
   const filteredNotes = filteredByFolderId.map(note => {
     return (
       <li key={note.id}>
-        <Note note={note}/>
+        <Note 
+          note={note}
+        />
       </li>
     );
   });
+
 
   // Return only the note that was clicked on for the
   // "/notes/:noteId" path
   const singleNote = notesArr
     .find(note => note.id === params.noteId) || {};
-
+  
   // Conditionally display based on whether 
   return (
     <section className="MainPanel_main-view">
@@ -60,6 +65,7 @@ MainPanel.defaultProps = {
   params: "",
   filteredByFolderId: [],
   filteredNotes: [],
+  singleNote: {},
 };
 
 export default MainPanel;
