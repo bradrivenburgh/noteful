@@ -22,19 +22,19 @@ header {
 
 }
 
-.Main_main-view {
+.MainPanel_main-view {
   flex: 2;
   padding: 1em;
   border: 1px solid black;
 }
 
-.SideBar_main-view {
+.FolderPanel_main-view {
   flex: 1;
   border: 1px solid black;
   padding: 1em;
 }
 
-.SideBar_folder-list {
+.FolderPanel_folder-list {
   list-style-type: none;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
@@ -43,7 +43,7 @@ header {
   padding-inline-start: 0px;
 }
 
-.SideBar_folder-item {
+.FolderPanel_folder-item {
   border: 1px solid black;
   padding: 1em;
   display: flex;
