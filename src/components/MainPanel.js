@@ -15,7 +15,7 @@ function MainPanel() {
         <Note note={note}/>
       </li>
     );
-  })
+  });
 
   return (
     <section className="MainPanel_main-view">
