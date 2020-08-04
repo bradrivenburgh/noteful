@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { NotefulContext } from './NotefulContext'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory, useParams, useRouteMatch } from 'react-router-dom';
 
-function SideBarMain() {
+function FolderPanel() {
   // Get folders object from context and then destructure it
   // so we are only left with the array.
   const {folders} = useContext(NotefulContext);
@@ -22,6 +22,15 @@ function SideBarMain() {
     );
   });
 
+  // Experimenting with getting the right info
+  const {noteId} = useParams()
+  const match = useRouteMatch();
+  console.log(match);
+  const singleFolder = foldersArr.find(folder => folder.id === noteId)
+
+  const history = useHistory();
+  console.log(history)
+
   return (
     <section className="FolderPanel_main-view">
       <ul className="FolderPanel_folder-list">
@@ -31,4 +40,14 @@ function SideBarMain() {
   );
 }
 
-export default SideBarMain;
+FolderPanel.defaultProps = {
+  history: {},
+  folders: {},
+  foldersArr: [],
+  singleFolder: {}, 
+  allFolders: [],
+  noteId: "",
+  
+};
+
+export default FolderPanel;

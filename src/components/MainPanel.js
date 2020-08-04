@@ -20,10 +20,9 @@ function MainPanel() {
 
   // Get the folderId from the current path
   let params = useParams();
-  console.log(params);
   
   // Filter notes based on the folder.id of the selected
-  // folder in the FolderPanel
+  // folder in the FolderPanel for the "folders/:foldersId" path
   const filteredByFolderId = notesArr.filter(note => note.folderId === params.folderId)
   const filteredNotes = filteredByFolderId.map(note => {
     return (
@@ -33,13 +32,20 @@ function MainPanel() {
     );
   });
 
-  console.log(filteredByFolderId);
+  // Return only the note that was clicked on for the
+  // "/notes/:noteId" path
+  const singleNote = notesArr
+    .find(note => note.id === params.noteId) || {};
+
+  // Conditionally display based on whether 
   return (
     <section className="MainPanel_main-view">
       <ul className="Note_note-list">
-        {filteredByFolderId.length 
-        ? filteredNotes 
-        : allNotes}
+        {filteredNotes.length 
+        ? filteredNotes :
+        Object.keys(singleNote).length
+        ? <Note note={singleNote} /> :
+        allNotes}
       </ul>
       <div>
         <button>Add Note</button>
@@ -48,6 +54,12 @@ function MainPanel() {
   );
 }
 
-MainPanel.defaultProps = {notes: []};
+MainPanel.defaultProps = {
+  notes: {},
+  notesArr: [], 
+  params: "",
+  filteredByFolderId: [],
+  filteredNotes: [],
+};
 
 export default MainPanel;
