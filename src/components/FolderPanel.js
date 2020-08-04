@@ -8,6 +8,7 @@ function SideBarMain() {
   const {folders} = useContext(NotefulContext);
   const {folders: foldersArr} = folders;
 
+  //Make a list of all folders for the "/" path
   const allFolders = foldersArr.map(folder => {
     return (
       <li key={folder.id} className="FolderPanel_folder-item">

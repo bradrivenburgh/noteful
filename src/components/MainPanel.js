@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useRouteMatch, useParams } from 'react-router-dom';
 import { NotefulContext } from './NotefulContext';
 import Note from './Note';
 
@@ -17,10 +18,28 @@ function MainPanel() {
     );
   });
 
+  // Get the folderId from the current path
+  let params = useParams();
+  console.log(params);
+  
+  // Filter notes based on the folder.id of the selected
+  // folder in the FolderPanel
+  const filteredByFolderId = notesArr.filter(note => note.folderId === params.folderId)
+  const filteredNotes = filteredByFolderId.map(note => {
+    return (
+      <li key={note.id}>
+        <Note note={note}/>
+      </li>
+    );
+  });
+
+  console.log(filteredByFolderId);
   return (
     <section className="MainPanel_main-view">
       <ul className="Note_note-list">
-        {allNotes}
+        {filteredByFolderId.length 
+        ? filteredNotes 
+        : allNotes}
       </ul>
       <div>
         <button>Add Note</button>
