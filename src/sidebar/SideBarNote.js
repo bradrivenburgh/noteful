@@ -16,5 +16,3 @@ function SideBarNote({routerProps, folder}) {
 }
 
 export default SideBarNote;
-
-//routerProps.match
