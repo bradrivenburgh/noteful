@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { NotefulContext } from './NotefulContext'
+import { NotefulContext } from '../NotefulContext'
 import { NavLink, useHistory } from 'react-router-dom';
 
 function FolderPanel() {

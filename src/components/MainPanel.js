@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import { NotefulContext } from './NotefulContext';
+import { NotefulContext } from '../NotefulContext';
 import Note from './Note';
 
 function MainPanel() {

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import { NotefulContext } from './NotefulContext';
+import { NotefulContext } from '../NotefulContext';
 import moment from 'moment';
 
 function Note({ note }) {

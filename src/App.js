@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
-import { NotefulContext } from './components/NotefulContext';
+import { NotefulContext } from './NotefulContext';
 import { routes } from './routes';
 import { getFolderData, getNoteData } from './fetchData';
 
