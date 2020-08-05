@@ -17,6 +17,12 @@ function App() {
     getNoteData().then(data => setNotes(data));
   }, []);
 
+  const deleteNote = (noteId) => {
+    const notesPostDelete = notes
+      .filter(note => !note.id === noteId);
+    setNotes(notesPostDelete);
+  }
+
   const routeList = routes.map((route, index) => (
     <Route 
       key={index}
@@ -47,7 +53,8 @@ function App() {
             folders,
             notes,
             selectedNote,
-            setSelectedNote
+            setSelectedNote,
+            deleteNote
           }}
         >
           <Switch>
