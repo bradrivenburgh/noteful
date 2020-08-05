@@ -77,4 +77,8 @@ function Note({ note }) {
   );
 }
 
+Note.defaultProps = {
+  note: {},
+}
+
 export default Note;
