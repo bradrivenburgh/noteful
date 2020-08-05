@@ -1,13 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
-import STORE from './dummy-store'
 import { NotefulContext } from './components/NotefulContext';
 import { routes } from './routes';
 
 function App() {
-  const [folders, setFolders] = useState(STORE.folders);
-  const [notes, setNotes] = useState(STORE.notes);
+  const [folders, setFolders] = useState([]);
+  const [notes, setNotes] = useState([]);
   const [selectedNote, setSelectedNote] = useState({})
+
+  useEffect(() => {
+    fetch("http://localhost:9090/folders")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(response.statusText)
+      }
+      return response.json();
+    })
+    .then(data => {
+      setFolders(data)
+    })
+    .catch(error => {
+      console.log(error.message)
+    }) 
+
+    fetch("http://localhost:9090/notes")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(response.statusText)
+      }
+      return response.json();
+    })
+    .then(data => {
+      setNotes(data)
+    })
+    .catch(error => {
+      console.log(error.message)
+    }) 
+  }, []);
 
   const routeList = routes.map((route, index) => (
     <Route 
