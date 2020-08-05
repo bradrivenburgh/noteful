@@ -26,7 +26,10 @@ function App() {
   return (
     <>
       <header>
-        <Link to='/'>            
+        <Link 
+          to='/' 
+          onClick={() => setSelectedNote({})}
+        >            
             <h1>Noteful</h1>
         </Link>
       </header>
