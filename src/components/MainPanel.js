@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useRouteMatch, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { NotefulContext } from './NotefulContext';
 import Note from './Note';
 
@@ -36,25 +36,35 @@ function MainPanel() {
     );
   });
 
-
   // Return only the note that was clicked on for the
   // "/notes/:noteId" path
   const singleNote = notesArr
     .find(note => note.id === params.noteId) || {};
   
-  // Conditionally display based on whether 
-  return (
-    <section className="MainPanel_main-view">
+  const defaultAndFilteredView = (
+    <>
       <ul className="Note_note-list">
         {filteredNotes.length 
-        ? filteredNotes :
-        Object.keys(singleNote).length
-        ? <Note note={singleNote} /> :
-        allNotes}
+          ? filteredNotes :
+          allNotes}
       </ul>
-      <div>
-        <button>Add Note</button>
-      </div>
+      <button>Add Note</button>
+    </>
+  );
+  const singleNoteView = (
+    <>
+      <ul className="Note_note-list">
+        <Note note={singleNote} />
+      </ul>
+      <p>{singleNote.content}</p>
+    </>
+  );
+  
+  return (
+    <section className="MainPanel_main-view">
+      { Object.keys(singleNote).length
+        ? singleNoteView :
+        defaultAndFilteredView }      
     </section>
   );
 }
