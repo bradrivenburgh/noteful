@@ -36,11 +36,10 @@ function App() {
       <main className="App_main-content">
         <NotefulContext.Provider
           value={{
-            folders: {folders},
-            notes: {notes},
-            selectedNote: selectedNote,
+            folders,
+            notes,
+            selectedNote,
             setSelectedNote
-            
           }}
         >
           <Switch>

@@ -4,13 +4,11 @@ import { NotefulContext } from './NotefulContext';
 import Note from './Note';
 
 function MainPanel() {
-  // Get notes object from context and then destructure it
-  // so we are only left with the array.
+  // Get notes array from context
   const {notes} = useContext(NotefulContext);
-  const {notes: notesArr} = notes;
   
   // Make a list of all notes for the "/" path
-  const allNotes = notesArr.map(note => {
+  const allNotes = notes.map(note => {
     return (
       <li key={note.id}>
         <Note 
@@ -23,9 +21,9 @@ function MainPanel() {
   // Get the folderId from the current path
   let params = useParams();
   
-  // Filter notes based on the folder.id of the selected
-  // folder in the FolderPanel for the "folders/:foldersId" path
-  const filteredByFolderId = notesArr.filter(note => note.folderId === params.folderId)
+  // Create a list of filtered notes based on the folder.id of
+  // the selected folder for the "folders/:foldersId" path
+  const filteredByFolderId = notes.filter(note => note.folderId === params.folderId)
   const filteredNotes = filteredByFolderId.map(note => {
     return (
       <li key={note.id}>
@@ -38,9 +36,10 @@ function MainPanel() {
 
   // Return only the note that was clicked on for the
   // "/notes/:noteId" path
-  const singleNote = notesArr
+  const singleNote = notes
     .find(note => note.id === params.noteId) || {};
   
+  // Create the views for the "/" and "/folders/:folderId" paths
   const defaultAndFilteredView = (
     <>
       <ul className="Note_note-list">
@@ -51,6 +50,8 @@ function MainPanel() {
       <button>Add Note</button>
     </>
   );
+
+  // Create the view for the "/notes/:notesId" path
   const singleNoteView = (
     <>
       <ul className="Note_note-list">
@@ -70,8 +71,7 @@ function MainPanel() {
 }
 
 MainPanel.defaultProps = {
-  notes: {},
-  notesArr: [], 
+  notes: [],
   params: "",
   filteredByFolderId: [],
   filteredNotes: [],

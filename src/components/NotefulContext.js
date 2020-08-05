@@ -6,5 +6,5 @@ export const NotefulContext = createContext({
   selectedNote: {},
   addFolder: () => {},
   addNote: () => {},
-  deleteNote: () => {}
+  deleteNote: () => {},
 })

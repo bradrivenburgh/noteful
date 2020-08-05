@@ -3,13 +3,11 @@ import { NotefulContext } from './NotefulContext'
 import { NavLink, useHistory } from 'react-router-dom';
 
 function FolderPanel() {
-  // Get folders object from context and then destructure it
-  // so we are only left with the array.
+  // Get state data from context
   const {folders, selectedNote, setSelectedNote} = useContext(NotefulContext);
-  const {folders: foldersArr} = folders;
 
   // Make a list of all folders for the "/" path
-  const allFolders = foldersArr.map(folder => {
+  const allFolders = folders.map(folder => {
     return (
       <li key={folder.id} className="FolderPanel_folder-item">
         <NavLink 
@@ -22,18 +20,18 @@ function FolderPanel() {
     );
   });
 
-  // Pull the selectedNote value from context and compare its
-  // folderId with the folderIds in the folders array; for the
-  // "note/:noteId"
-  let singleFolder = foldersArr
+  // Pull the selectedNote value from context and and find the matching
+  // folderId in the folders array; for the "note/:noteId" path
+  let singleFolder = folders
     .find(folder => folder.id === selectedNote.folderId) || {};
 
   // Get the history for the goBack() functionality for the 
-  // "Go Back" button
+  // "Go Back" button; for the "/notes/:noteId" path
   const history = useHistory();
 
-  // Set the selectedNote in state back to an empty object
-  // in order to render the folder list again
+  // When the "Go Back" button is clicked, set the selectedNote
+  // in state back to an empty object in order to render the
+  // folder list again; for the "note/:noteId" path 
   const handleClick = () => {
     setSelectedNote({})
     history.goBack();
@@ -61,11 +59,9 @@ function FolderPanel() {
 
 FolderPanel.defaultProps = {
   history: {},
-  folders: {},
-  foldersArr: [],
+  folders: [],
   allFolders: [],
-  noteId: "",
-  
+  noteId: "",  
 };
 
 export default FolderPanel;
