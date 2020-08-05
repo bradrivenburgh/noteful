@@ -35,8 +35,12 @@ function Note({note}) {
   return (
     <div className="Note_note-item">
       {safeLink}
-      <span>Last modified on {date} </span>
-      <button>Delete Note</button>
+      <div 
+        className="Note_note-item_button-layout"
+      >
+        <span>Last modified on {date} </span>
+        <button>Delete Note</button>
+      </div>
     </div>
   );
 }

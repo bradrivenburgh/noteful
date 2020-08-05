@@ -67,13 +67,10 @@ header {
 .Note_note-item {
   border: 1px solid black;
   margin: 1em;
-  padding: 0 1em;
-  display: flex;
-  flex-direction: column;
-  align-content: space-around;
+  padding: 0 1em 1em;
 }
 
-.Note_note-item button {
-  align-self: flex-end;
-  display: inline-flex;
+.Note_note-item_button-layout {
+  display: flex;
+  justify-content: space-between;
 }
