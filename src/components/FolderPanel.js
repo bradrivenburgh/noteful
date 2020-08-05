@@ -6,6 +6,8 @@ function FolderPanel() {
   // Get state data from context
   const {folders, selectedNote, setSelectedNote} = useContext(NotefulContext);
 
+  
+
   // Make a list of all folders for the "/" path
   const allFolders = folders.map(folder => {
     return (
