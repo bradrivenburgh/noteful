@@ -19,7 +19,7 @@ function App() {
 
   const deleteNote = (noteId) => {
     const notesPostDelete = notes
-      .filter(note => !note.id === noteId);
+      .filter(note => note.id !== noteId);
     setNotes(notesPostDelete);
   }
 

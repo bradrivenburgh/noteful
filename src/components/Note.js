@@ -1,18 +1,39 @@
 import React, { useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { NotefulContext } from './NotefulContext';
 import moment from 'moment';
 
-function Note({note}) {
+function Note({ note }) {
   // Format the "Last modified" date string
   const date = moment(note.modified).format("do MMM YYYY");
   
   // Get the selectedNote state from context and set it the note prop
-  const {setSelectedNote} = useContext(NotefulContext);
+  const {setSelectedNote, deleteNote} = useContext(NotefulContext);
   const handleClick = (note) => {
     setSelectedNote(note)
   }
-  
+
+  const history = useHistory();
+
+  const handleDeleteNote = (noteId, cb) => {
+    fetch(`http://localhost:9090/notes/${noteId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        return response.json().then(error => {
+          throw error
+        });
+      }
+      return response.json();
+    })
+    .then(data => cb(noteId))
+    .catch(error => console.error(error))
+  }
+
   // Get the current path name to create a conditional
   // Link that is disabled once it in note view. This
   // will cut down on unnecessary renders and improve the
@@ -39,7 +60,14 @@ function Note({note}) {
         className="Note_note-item_button-layout"
       >
         <span>Last modified on {date} </span>
-        <button>Delete Note</button>
+        <button
+          onClick={() => {
+            history.push("/")
+            handleDeleteNote(note.id,deleteNote)
+          }}
+        >
+          Delete Note
+        </button>
       </div>
     </div>
   );

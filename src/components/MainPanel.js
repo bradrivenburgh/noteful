@@ -5,7 +5,7 @@ import Note from './Note';
 
 function MainPanel() {
   // Get notes array from context
-  const {notes} = useContext(NotefulContext);
+  const { notes } = useContext(NotefulContext);
   
   // Make a list of all notes for the "/" path
   const allNotes = notes.map(note => {
@@ -17,6 +17,7 @@ function MainPanel() {
       </li>
     );
   });
+
 
   // Get the folderId from the current path
   let params = useParams();
@@ -55,7 +56,9 @@ function MainPanel() {
   const singleNoteView = (
     <>
       <ul className="Note_note-list">
-        <Note note={singleNote} />
+        <Note 
+          note={singleNote}
+        />
       </ul>
       <p>{singleNote.content}</p>
     </>
