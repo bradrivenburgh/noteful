@@ -9,7 +9,7 @@ function FolderPanel() {
   // Make a list of all folders for the "/" path
   const allFolders = folders.map(folder => {
     return (
-      <li key={folder.id} className="FolderPanel_folder-item">
+      <li key={folder.id} className="FolderPanel_folder-item" >
         <NavLink 
           to={`/folders/${folder.id}`}
           activeClassName="selected"
