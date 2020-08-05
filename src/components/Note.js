@@ -13,7 +13,8 @@ function Note({ note }) {
     setSelectedNote(note)
   }
 
-  // get history to allow for 
+  // get history to allow the app to navigate back to the
+  // "/" path when a note is deleted
   const history = useHistory();
 
   const handleDeleteNote = (noteId, cb) => {
