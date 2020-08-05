@@ -13,6 +13,7 @@ function Note({ note }) {
     setSelectedNote(note)
   }
 
+  // get history to allow for 
   const history = useHistory();
 
   const handleDeleteNote = (noteId, cb) => {
@@ -52,7 +53,6 @@ function Note({ note }) {
         </Link>
         )
   );
-
   return (
     <div className="Note_note-item">
       {safeLink}
@@ -62,7 +62,10 @@ function Note({ note }) {
         <span>Last modified on {date} </span>
         <button
           onClick={() => {
-            history.push("/")
+            if (pathname === `/notes/${note.id}`) {
+              setSelectedNote({})
+              history.push("/")
+            }
             handleDeleteNote(note.id,deleteNote)
           }}
         >
