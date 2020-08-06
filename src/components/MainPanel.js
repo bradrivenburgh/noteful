@@ -5,7 +5,7 @@ import Note from './Note';
 
 function MainPanel() {
   // Get notes array from context
-  const { notes } = useContext(NotefulContext);
+  const { notes=[] } = useContext(NotefulContext);
   
   // Make a list of all notes for the "/" path
   const allNotes = notes.map(note => {
@@ -80,9 +80,5 @@ function MainPanel() {
     </section>
   );
 }
-
-MainPanel.defaultProps = {
-  notes: [],
-};
 
 export default MainPanel;

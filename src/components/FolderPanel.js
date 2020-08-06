@@ -4,7 +4,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 
 function FolderPanel() {
   // Get state data from context
-  const {folders, selectedNote, setSelectedNote} = useContext(NotefulContext);
+  const {folders=[], selectedNote, setSelectedNote} = useContext(NotefulContext);
 
   // Make a list of all folders for the "/" path
   const allFolders = folders.map(folder => {
@@ -18,7 +18,7 @@ function FolderPanel() {
         </NavLink>
       </li>
     );
-  });
+  }) || [];
 
   // Pull the selectedNote value from context and and find the matching
   // folderId in the folders array; for the "note/:noteId" path
@@ -56,12 +56,5 @@ function FolderPanel() {
     </section>
   );
 }
-
-FolderPanel.defaultProps = {
-  history: {},
-  folders: [],
-  allFolders: [],
-  noteId: "",  
-};
 
 export default FolderPanel;
