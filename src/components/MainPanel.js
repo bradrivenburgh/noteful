@@ -45,7 +45,7 @@ function MainPanel() {
 
   // Create the views for the "/" and "/folders/:folderId" paths
   // Check if there is a populated filtered notes list to control
-  // view; needed to add a check if the pathname is at "/" 
+  // view; needed to add a check if the pathname is "/" 
   // to prevent an empty folder from showing notes 
   const defaultAndFilteredView = (
     <>

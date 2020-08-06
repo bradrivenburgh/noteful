@@ -1,12 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
 import Note from './Note';
 
 describe('Note component', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Router><Note /></Router>, div);
-    ReactDOM.unmountComponentAtNode(div);
+    render(<Router><Note /></Router>);
   });
+  
+  it('has a Delete Note button', () => {
+    render(<Router><Note /></Router>);
+    expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+
+  
 });

@@ -1,12 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
 import {BrowserRouter as Router} from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
 
 describe('App component', () => {
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Router><App /></Router>, div);
-    ReactDOM.unmountComponentAtNode(div);
+  test('renders without crashing', () => {
+    render(<Router><App /></Router>);
+
+    // screen.debug()
   });
 })
