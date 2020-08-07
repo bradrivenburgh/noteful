@@ -1,22 +1,25 @@
 import React from 'react';
 import App from './App';
+import { notes, folders } from './store-for-tests'
 import { NotefulContext } from './NotefulContext';
 import { createMemoryHistory } from 'history';
-import {BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { act, render, fireEvent, cleanup, screen} from '@testing-library/react';
 
 afterEach(cleanup);
 
+const promise = Promise.resolve() 
+
 const emptyDataService = {
-  getFolderData: () => { return Promise.resolve(); },
-  getNoteData: () => { return Promise.resolve(); },  
+  getFolderData: () => promise,
+  getNoteData: () => promise, 
 };
 
 const fakeDataService = {
-  getFolderData: () => { return Promise.resolve(); },
-  getNoteData: () => { return Promise.resolve(); },  
+  getFolderData: () => Promise.resolve(folders),
+  getNoteData: () => Promise.resolve(notes),  
 };
-
+ 
 describe('App component', () => {
   test('renders without crashing', () => {
     render(
@@ -55,5 +58,5 @@ describe('App component', () => {
     expect(container.innerHTML).toMatch("Noteful");
   
     fireEvent.click(getByRole("link"))
-  })
-})
+  });
+});
