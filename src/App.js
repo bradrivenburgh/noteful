@@ -15,7 +15,7 @@ function App({service}) {
   useEffect(() => {
     service.getFolderData().then(data => setFolders(data));
     service.getNoteData().then(data => setNotes(data));
-  }, []);
+  }, [service]);
 
   const deleteNote = (noteId) => {
     const notesPostDelete = notes

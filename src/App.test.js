@@ -1,7 +1,6 @@
 import React from 'react';
 import App from './App';
 import { notes, folders } from './store-for-tests'
-import { NotefulContext } from './NotefulContext';
 import { createMemoryHistory } from 'history';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render, fireEvent, cleanup, screen} from '@testing-library/react';
@@ -30,13 +29,6 @@ describe('App component', () => {
 
   });
 
-  // test('updates Context value from child component', () => {
-  //   const { container, getByText } = render(<Router><App /></Router>);
-  //   expect(getByText(/Cats/i));
-
-  //   screen.debug()
-  // });
-
   test('contains Noteful header', () => {
     const { getByText } = render(<Router><App  service={emptyDataService}/></Router>);
     getByText("Noteful");
@@ -58,7 +50,7 @@ describe('App component', () => {
     expect(container.innerHTML).toMatch("Noteful");
   
     fireEvent.click(getByText(/Noteful/i));
-    expect(getByText('Noteful').closest('a')).toHaveAttribute('href', '/');
-    screen.debug()
+    expect(getByText(/Noteful/i).closest('a')).toHaveAttribute('href', '/');
+    expect(history.location.pathname).toBe('/')
   });
 });
