@@ -4,7 +4,7 @@ import { notes, folders } from './store-for-tests'
 import { NotefulContext } from './NotefulContext';
 import { createMemoryHistory } from 'history';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { act, render, fireEvent, cleanup, screen} from '@testing-library/react';
+import { render, fireEvent, cleanup, screen} from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -50,13 +50,15 @@ describe('App component', () => {
   // TODO: We want to test that clicking on a link updates app someway
   test('full app rendering/navigating', () => {
     const history = createMemoryHistory();
-    const { container, getByRole } = render(
+    const { container, getByText } = render(
       <Router history={history}>
         <App  service={fakeDataService}/>
       </Router>
     );
     expect(container.innerHTML).toMatch("Noteful");
   
-    fireEvent.click(getByRole("link"))
+    fireEvent.click(getByText(/Noteful/i));
+    expect(getByText('Noteful').closest('a')).toHaveAttribute('href', '/');
+    screen.debug()
   });
 });
