@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 import { NotefulContext } from './NotefulContext';
 import { routes } from './routes';
-import { getFolderData, getNoteData } from './fetchData';
 
-function App() {
+function App({service}) {
+
   const [folders, setFolders] = useState([]);
   const [notes, setNotes] = useState([]);
   const [selectedNote, setSelectedNote] = useState({})
 
   // Make fetch calls; functions from fetchData return
-  // promises, so use .then() statments to call state
+  // promises, so use .then() statements to call state
   // setter functions
   useEffect(() => {
-    getFolderData().then(data => setFolders(data));
-    getNoteData().then(data => setNotes(data));
+    service.getFolderData().then(data => setFolders(data));
+    service.getNoteData().then(data => setNotes(data));
   }, []);
 
   const deleteNote = (noteId) => {
