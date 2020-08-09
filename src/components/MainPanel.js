@@ -4,7 +4,7 @@ import { NotefulContext } from '../NotefulContext';
 import Note from './Note';
 
 function MainPanel() {
-  // Get notes array from context
+  // Get notes array from context; set default value
   const { notes=[] } = useContext(NotefulContext);
   
   // Make a list of all notes for the "/" path

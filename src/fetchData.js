@@ -31,3 +31,7 @@ export function getNoteData() {
     console.log(error.message)
   });
 }
+
+//Add POST call to add a folder
+
+//Add POST call to add a note

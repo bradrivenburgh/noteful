@@ -9,7 +9,7 @@ function App({service}) {
   const [notes, setNotes] = useState([]);
   const [selectedNote, setSelectedNote] = useState({})
 
-  // Make fetch calls; functions from fetchData return
+  // Inject fetch calls; "get" functions from fetchData return
   // promises, so use .then() statements to call state
   // setter functions
   useEffect(() => {
@@ -23,6 +23,7 @@ function App({service}) {
     setNotes(notesPostDelete);
   }
 
+  // Create routes from the routes.js config file
   const routeList = routes.map((route, index) => (
     <Route 
       key={index}
