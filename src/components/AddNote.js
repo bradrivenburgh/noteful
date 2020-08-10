@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import { postNoteData } from '../fetchData';
 
-export default function AddNote() {
+function AddNote() {
   // Controlled component; need to establish state for form locally
   // Notes also have an id, modified,
   
@@ -13,26 +15,53 @@ export default function AddNote() {
     id: "", 
     name: "",
     modified: "",
+    folderId: "",
     content: "",
   });
 
+  // TO DO: Get previous path if navigating from folder view
+  // in order to grab the folderId
+  const history = useHistory();
+  const location = useLocation();
+  console.log(history)
+  console.log(location)
   
   // Set up fetch call to POST note in fetchData.js and import
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    postNoteData(formData);
+    history.push("/");
   }
 
   // Set up handleChange to allow dynamic, controlled form
-  const handleChange = (e) = {
-    const [name, value] = e.target;
+  const handleChange = (e) => {
+    const {name, value} = e.target;
     setFormData({ ...formData, [name]: value});
   }
 
   return(
-    <form className="add-note">
-      <label htmlFor="name">Something</label>
-      <input type="text" name="name" id="name" value={formData.name} />
+    <form className="add-note" onSubmit={(e) => handleSubmit(e)}>
+      <label htmlFor="name">Title: </label>
+        <input 
+          type="text" 
+          name="name" 
+          id="name"
+          value={formData.name}
+          onChange={(e) => handleChange(e)}
+        />
+      <br />
+      <label htmlFor="name">Content: </label>
+        <textarea 
+          type="text" 
+          name="content" 
+          id="content"
+          value={formData.content}
+          onChange={(e) => handleChange(e)}
+        />
+        <br />
+          <button>Submit</button>
     </form>
   );
 }
+
+export default AddNote;

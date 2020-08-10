@@ -17,5 +17,5 @@ export const routes = [
     path: "/notes/:noteId",
     folderPanel: FolderPanel,
     mainPanel: MainPanel
-  },  
+  },
 ]

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, Link } from 'react-router-dom';
 import { NotefulContext } from '../NotefulContext';
 import Note from './Note';
 
@@ -56,7 +56,9 @@ function MainPanel() {
           ? allNotes :
           null}
       </ul>
-      <button>Add Note</button>
+      <Link to="/add-note">
+        <button>Add Note</button>
+      </Link>
     </>
   );
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 import { NotefulContext } from './NotefulContext';
 import { routes } from './routes';
+import AddNote from './components/AddNote';
 
 function App({service}) {
 
@@ -29,7 +30,7 @@ function App({service}) {
       key={index}
       path={route.path}
       exact={route.exact}
-      children={() => 
+      render={() => 
         <>
           <route.folderPanel />
           <route.mainPanel />
@@ -60,6 +61,7 @@ function App({service}) {
         >
           <Switch>
             {routeList}
+            <Route exact path="/add-note" component={AddNote} />
           </Switch>
         </NotefulContext.Provider>
       </main>
