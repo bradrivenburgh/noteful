@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Switch, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { NotefulContext } from './NotefulContext';
 import { routes } from './routes';
-import AddNote from './components/AddNote';
 
 function App({service}) {
 
@@ -24,31 +23,17 @@ function App({service}) {
     setNotes(notesPostDelete);
   }
 
-  // Create routes from the routes.js config file
-  const routeList = routes.map((route, index) => (
-    <Route 
-      key={index}
-      path={route.path}
-      exact={route.exact}
-      render={() => 
-        <>
-          <route.folderPanel />
-          <route.mainPanel />
-        </>
-      }
-    />
-  ))
-  
   return (
     <>
       <header>
-        <Link 
-          to='/' 
+        <Link
+          to='/'
           onClick={() => setSelectedNote({})}
-        >            
+        >
             <h1>Noteful</h1>
         </Link>
       </header>
+      
       <main className="App_main-content">
         <NotefulContext.Provider
           value={{
@@ -59,10 +44,7 @@ function App({service}) {
             deleteNote
           }}
         >
-          <Switch>
-            {routeList}
-            <Route exact path="/add-note" component={AddNote} />
-          </Switch>
+          {routes}
         </NotefulContext.Provider>
       </main>
     </>

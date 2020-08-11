@@ -3,7 +3,8 @@ import App from './App';
 import { notes, folders } from './store-for-tests'
 import { createMemoryHistory } from 'history';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { render, fireEvent, cleanup, screen} from '@testing-library/react';
+// import { Router } from 'react-router-dom';
+import { act, render, fireEvent, cleanup, screen} from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -20,15 +21,18 @@ const fakeDataService = {
 };
  
 describe('App component', () => {
-  test('renders without crashing', () => {
+  test('renders without crashing', async () => {
+
     render(
       <Router>
         <App service={emptyDataService}/>
       </Router>
     );
 
+    await act(() => emptyDataService.getFolderData());
+    await act(() => emptyDataService.getNoteData());
   });
-
+/**
   test('contains Noteful header', () => {
     const { getByText } = render(<Router><App  service={emptyDataService}/></Router>);
     getByText("Noteful");
@@ -53,4 +57,5 @@ describe('App component', () => {
     expect(getByText(/Noteful/i).closest('a')).toHaveAttribute('href', '/');
     expect(history.location.pathname).toBe('/')
   });
+/**/
 });
