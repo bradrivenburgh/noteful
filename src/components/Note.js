@@ -4,6 +4,9 @@ import { NotefulContext } from '../NotefulContext';
 import moment from 'moment';
 
 function Note({ note }) {
+  // TO-DO -------------Create PropTypes for note prop
+
+
   // Format the "Last modified" date string
   const date = moment(note.modified).format("do MMM YYYY");
   

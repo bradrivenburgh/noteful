@@ -4,7 +4,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 
 function FolderPanel() {
   // Get state data from context
-  const {folders=[], selectedNote, setSelectedNote} = useContext(NotefulContext);
+  const {folders=[], selectedNote, setSelectedNote, setSelectedFolder} = useContext(NotefulContext);
 
   // Make a list of all folders for the "/" path
   const allFolders = folders.map(folder => {
@@ -13,6 +13,7 @@ function FolderPanel() {
         <NavLink 
           to={`/folders/${folder.id}`}
           activeClassName="selected"
+          onClick={() => setSelectedFolder(folder)}
         >
           <h4>{folder.name}</h4>
         </NavLink>

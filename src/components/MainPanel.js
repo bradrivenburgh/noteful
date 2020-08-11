@@ -56,7 +56,7 @@ function MainPanel() {
           ? allNotes :
           null}
       </ul>
-      <Link to="/add-note">
+      <Link to="/add-note" >
         <button>Add Note</button>
       </Link>
     </>

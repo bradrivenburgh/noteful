@@ -1,31 +1,29 @@
-import React, { useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { NotefulContext } from '../NotefulContext';
+import { useHistory } from 'react-router-dom';
 import { postNoteData } from '../fetchData';
 
 function AddNote() {
-  // Controlled component; need to establish state for form locally
-  // Notes also have an id, modified,
-  
-  // The note id is automatically assigned by server
-  // TO DO: Pull folderId from react-router history?
-  // TO DO: How to get modified timestamp?
+  // set form state; the note id is automatically assigned by server
+  // Get selectedFolder state and setter function from Context
+  const {selectedFolder, setSelectedFolder} = useContext(NotefulContext);
   const [formData, setFormData] = useState({
     id: "", 
     name: "",
-    modified: "",
-    folderId: "",
+    modified: new Date(),
+    folderId: `${selectedFolder.id || ""}`,
     content: "",
   });
 
-  // TO DO: Get previous path if navigating from folder view
-  // in order to grab the folderId
+  // Get history from react-router to redirect to root path
+  // upon submission.
   const history = useHistory();
-  const location = useLocation();
   
   // Set up fetch call to POST note in fetchData.js and import
   const handleSubmit = (e) => {
     e.preventDefault();
     postNoteData(formData);
+    setSelectedFolder({});
     history.push("/");
   }
 
@@ -34,6 +32,9 @@ function AddNote() {
     const {name, value} = e.target;
     setFormData({ ...formData, [name]: value});
   }
+
+
+  // TO DO ----- Need to add form validation: no empty title field;
 
   return(
     <form className="add-note" onSubmit={(e) => handleSubmit(e)}>
