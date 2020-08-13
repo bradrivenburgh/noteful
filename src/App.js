@@ -17,16 +17,26 @@ function App({service}) {
   // promises, so use .then() statements to call state
   // setter functions; new fetch calls are made whenever
   // the pathname changes in order to keep the notes current
-  
   useEffect(() => {
-    service.getFolderData().then(data => setFolders(data));
-    service.getNoteData().then(data => setNotes(data));
+     service.getFolderData().then(data => setFolders(data));
+     service.getNoteData().then(data => setNotes(data));
   }, [service, pathname]);
 
   const deleteNote = (noteId) => {
     const notesPostDelete = notes
       .filter(note => note.id !== noteId);
     setNotes(notesPostDelete);
+  }
+
+  // Values to be provided to the NotefulContext.Provider
+  const notefulContextValues = {
+    folders,
+    notes,
+    selectedNote,
+    selectedFolder,
+    setSelectedNote,
+    setSelectedFolder,
+    deleteNote
   }
 
   return (
@@ -45,15 +55,7 @@ function App({service}) {
       
       <main className="App_main-content">
         <NotefulContext.Provider
-          value={{
-            folders,
-            notes,
-            selectedNote,
-            selectedFolder,
-            setSelectedNote,
-            setSelectedFolder,
-            deleteNote
-          }}
+          value={notefulContextValues}
         >
           {routes}
         </NotefulContext.Provider>

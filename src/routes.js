@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import FolderPanel from './components/FolderPanel';
 import MainPanel from './components/MainPanel';
 import AddNote from './components/AddNote';
+import AddFolder from './components/AddFolder';
 
   export const routes = 
     <Switch>
@@ -16,6 +17,9 @@ import AddNote from './components/AddNote';
       </Route>
       <Route path="/add-note">
         <AddNote />
+      </Route>
+      <Route path="/add-folder">
+        <AddFolder />
       </Route>
       <Route path="/">
         <FolderPanel />

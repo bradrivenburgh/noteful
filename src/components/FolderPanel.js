@@ -1,25 +1,10 @@
 import React, { useContext } from 'react';
 import { NotefulContext } from '../NotefulContext'
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, Link, useHistory } from 'react-router-dom';
 
 function FolderPanel() {
   // Get state data from context
   const {folders=[], selectedNote, setSelectedNote, setSelectedFolder} = useContext(NotefulContext);
-
-  // Make a list of all folders for the "/" path
-  const allFolders = folders.map(folder => {
-    return (
-      <li key={folder.id} className="FolderPanel_folder-item" >
-        <NavLink 
-          to={`/folders/${folder.id}`}
-          activeClassName="selected"
-          onClick={() => setSelectedFolder(folder)}
-        >
-          <h4>{folder.name}</h4>
-        </NavLink>
-      </li>
-    );
-  }) || [];
 
   // Pull the selectedNote value from context and and find the matching
   // folderId in the folders array; for the "note/:noteId" path
@@ -37,6 +22,21 @@ function FolderPanel() {
     setSelectedNote({})
     history.goBack();
   }
+
+  // The view for the "/" path
+  const allFolders = folders.map(folder => {
+    return (
+      <li key={folder.id} className="FolderPanel_folder-item" >
+        <NavLink 
+          to={`/folders/${folder.id}`}
+          activeClassName="selected"
+          onClick={() => setSelectedFolder(folder)}
+        >
+          <h4>{folder.name}</h4>
+        </NavLink>
+      </li>
+    );
+  }) || [];
   
   // The view for the "notes/:noteId" path
   const noteView = (
@@ -46,6 +46,9 @@ function FolderPanel() {
     </>
   );
 
+  // Only display noteView (with folder name displayed and go back
+  // button in place) if the user clicked on a note that were filtered by
+  // folderId 
   return (
     <section className="FolderPanel_main-view">
       <ul className="FolderPanel_folder-list">
@@ -54,6 +57,9 @@ function FolderPanel() {
         : allFolders}
 
       </ul>
+      <Link to="/add-folder" >
+        <button>Add Folder</button>
+      </Link>
     </section>
   );
 }

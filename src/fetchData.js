@@ -33,6 +33,24 @@ export function getNoteData() {
 }
 
 //Add POST call to add a folder
+export function postFolderData(data) {
+  fetch("http://localhost:9090/folders", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(response.statusText)
+    }
+    return response.json();
+  })
+  .catch(error => {
+    console.log(error.message)
+  });
+}
 
 //Add POST call to add a note
 export function postNoteData(data) {
@@ -52,5 +70,4 @@ export function postNoteData(data) {
   .catch(error => {
     console.log(error.message)
   });
-
 }
