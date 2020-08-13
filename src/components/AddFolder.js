@@ -7,7 +7,7 @@ import ValidationError from '../components/ValidationError';
 function AddFolder() {
   // set form state; the note id is automatically assigned by server
   // Get selectedFolder state and setter function from Context
-  const {selectedFolder, setSelectedFolder} = useContext(NotefulContext);
+  const {setSelectedFolder} = useContext(NotefulContext);
   const [formData, setFormData] = useState({
     id: "", 
     name: "",

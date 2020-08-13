@@ -32,7 +32,6 @@ export function getNoteData() {
   });
 }
 
-//Add POST call to add a folder
 export function postFolderData(data) {
   fetch("http://localhost:9090/folders", {
     method: "POST",
@@ -52,7 +51,6 @@ export function postFolderData(data) {
   });
 }
 
-//Add POST call to add a note
 export function postNoteData(data) {
   fetch("http://localhost:9090/notes", {
     method: "POST",

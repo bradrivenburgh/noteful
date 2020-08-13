@@ -4,6 +4,7 @@ import FolderPanel from './components/FolderPanel';
 import MainPanel from './components/MainPanel';
 import AddNote from './components/AddNote';
 import AddFolder from './components/AddFolder';
+import FormError from './components/FormError';
 
   export const routes = 
     <Switch>
@@ -16,10 +17,14 @@ import AddFolder from './components/AddFolder';
         <MainPanel />
       </Route>
       <Route path="/add-note">
+      <FormError>
         <AddNote />
+      </FormError>
       </Route>
       <Route path="/add-folder">
+      <FormError>
         <AddFolder />
+      </FormError>
       </Route>
       <Route path="/">
         <FolderPanel />
