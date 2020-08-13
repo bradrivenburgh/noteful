@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { NotefulContext } from '../NotefulContext';
 import { useHistory } from 'react-router-dom';
 import { postFolderData } from '../fetchData';
+import ValidationError from '../components/ValidationError';
 
 function AddFolder() {
   // set form state; the note id is automatically assigned by server
@@ -16,7 +17,11 @@ function AddFolder() {
   // upon submission.
   const history = useHistory();
   
-  // Set up fetch call to POST folder in fetchData.js
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setFormData({ ...formData, [name]: value});
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     postFolderData(formData);
@@ -24,14 +29,12 @@ function AddFolder() {
     history.goBack();
   }
 
-  // Set up handleChange to allow dynamic, controlled form
-  const handleChange = (e) => {
-    const {name, value} = e.target;
-    setFormData({ ...formData, [name]: value});
+  const validateName = () => {
+    const name = formData.name.trim();
+    if (name.length === 0) {
+      return 'Folder name is required';
+    }
   }
-
-
-  // TO DO ----- Need to add form validation: no empty title field;
 
   return(
     <form className="add-folder" onSubmit={(e) => handleSubmit(e)}>
@@ -43,9 +46,10 @@ function AddFolder() {
           value={formData.name}
           onChange={(e) => handleChange(e)}
         />
+      {formData.name.length >= 0 && <ValidationError message={validateName()} />}        
       <br />
           <button type="button" onClick={() => history.goBack()}>Cancel</button>
-          <button type="submit">Submit</button>
+          <button type="submit" disabled={validateName()}>Submit</button>
     </form>
   );
 }

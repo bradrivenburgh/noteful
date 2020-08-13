@@ -24,7 +24,7 @@ header {
 
 .MainPanel_main-view {
   flex: 2;
-  padding: 1em;
+  padding: 0 1em 1em 1em;
   border: 1px solid black;
 }
 

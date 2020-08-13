@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { NotefulContext } from '../NotefulContext';
 import { useHistory } from 'react-router-dom';
 import { postNoteData } from '../fetchData';
+import ValidationError from '../components/ValidationError';
 
 function AddNote() {
   // set form state; the note id is automatically assigned by server
@@ -35,6 +36,13 @@ function AddNote() {
     history.goBack();
   }
 
+  const validateName = () => {
+    const name = formData.name.trim();
+    if (name.length === 0) {
+      return 'A note title is required';
+    }
+  }
+
   const folderOptions = folders.map(folder => 
     <option 
       key={folder.id}
@@ -43,8 +51,6 @@ function AddNote() {
       {folder.name}
     </option>
     )
-
-  // TO DO ----- Need to add form validation: no empty title field;
 
   return(
     <form className="add-note" onSubmit={(e) => handleSubmit(e)}>
@@ -56,6 +62,7 @@ function AddNote() {
           value={formData.name}
           onChange={(e) => handleChange(e)}
         />
+      {formData.name.length >= 0 && <ValidationError message={validateName()} />}
       <br />
       <label htmlFor="name">Content: </label>
         <textarea 
@@ -76,7 +83,12 @@ function AddNote() {
           </select>
         <br />
           <button type="button" onClick={() => history.goBack()}>Cancel</button>
-          <button type="submit">Submit</button>
+          <button 
+            type="submit"
+            disabled={validateName()}
+          >
+            Submit
+          </button>
     </form>
   );
 }
