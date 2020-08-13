@@ -17,8 +17,7 @@ function AddNote() {
     content: "",
   });
 
-  // Get history from react-router to redirect to root path
-  // upon form submission.
+  // Get history from react-router to redirect upon submission
   const history = useHistory();
 
   const handleChange = (e) => {
@@ -43,6 +42,14 @@ function AddNote() {
     }
   }
 
+  const validateFolder = () => {
+    const folder = formData.folderName;
+    if (folder.length === 0) {
+      return 'A folder must be selected required';
+    }
+  }
+
+
   const folderOptions = folders.map(folder => 
     <option 
       key={folder.id}
@@ -62,7 +69,7 @@ function AddNote() {
           value={formData.name}
           onChange={(e) => handleChange(e)}
         />
-      {formData.name.length >= 0 && <ValidationError message={validateName()} />}
+      {formData.name.length === 0 && <ValidationError message={validateName()} />}
       <br />
       <label htmlFor="name">Content: </label>
         <textarea 
@@ -81,11 +88,13 @@ function AddNote() {
           >
             {folderOptions}
           </select>
+          {formData.folderName.length === 0 && <ValidationError message={validateFolder()} />}
+
         <br />
           <button type="button" onClick={() => history.goBack()}>Cancel</button>
           <button 
             type="submit"
-            disabled={validateName()}
+            disabled={validateName() || validateFolder()}
           >
             Submit
           </button>
