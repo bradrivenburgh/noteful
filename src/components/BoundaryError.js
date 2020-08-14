@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class BoundaryError extends Component {
   constructor(props) {
@@ -28,4 +29,8 @@ export default class BoundaryError extends Component {
     }
     return this.props.children;
   }  
+}
+
+BoundaryError.propTypes = {
+  thrownError: PropTypes.object
 }

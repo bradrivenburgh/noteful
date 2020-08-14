@@ -3,11 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { NotefulContext } from './NotefulContext';
 import { routes } from './routes';
 import BoundaryError from './components/BoundaryError';
+import PropTypes from 'prop-types';
 
 function App({service}) {
-  // TO-DO -------------Create PropTypes for service prop
-
-
   const [folders, setFolders] = useState([]);
   const [notes, setNotes] = useState([]);
   const [selectedNote, setSelectedNote] = useState({});
@@ -55,16 +53,24 @@ function App({service}) {
       </header>
       
       <main className="App_main-content">
-      <BoundaryError>
-        <NotefulContext.Provider
-          value={notefulContextValues}
-        >
-          {routes}
-        </NotefulContext.Provider>
-      </BoundaryError>
+        <BoundaryError>
+          <NotefulContext.Provider
+            value={notefulContextValues}
+          >
+            {routes}
+          </NotefulContext.Provider>
+        </BoundaryError>
       </main>
     </>
   );
+}
+
+App.propTypes = {
+  //service: PropTypes.object.isRequired
+  service: PropTypes.shape({
+    getFolderData: PropTypes.func.isRequired,
+    getNoteData: PropTypes.func.isRequired,
+  })
 }
 
 export default App;

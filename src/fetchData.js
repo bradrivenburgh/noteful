@@ -8,7 +8,7 @@ const postOptions = (data) => {
   body: JSON.stringify(data)
 }}
 
-// Helper function for fetch call
+// Helper function for fetch calls
 function fetchCall(url, options) {
   return fetch(url, options)
   .then(response => {

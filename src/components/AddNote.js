@@ -5,7 +5,7 @@ import { postNoteData } from '../fetchData';
 import ValidationError from '../components/ValidationError';
 
 function AddNote() {
-  // set form state; the note id is automatically assigned by server
+  // Set form state; the note id is automatically assigned by server
   // Get selectedFolder state and setter function from Context
   const {selectedFolder, setSelectedFolder, folders} = useContext(NotefulContext);
   const [formData, setFormData] = useState({
@@ -45,10 +45,9 @@ function AddNote() {
   const validateFolder = () => {
     const folder = formData.folderName;
     if (folder.length === 0) {
-      return 'A folder must be selected required';
+      return 'A folder must be selected';
     }
   }
-
 
   const folderOptions = folders.map(folder => 
     <option 

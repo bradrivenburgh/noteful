@@ -2,11 +2,9 @@ import React, { useContext } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { NotefulContext } from '../NotefulContext';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 function Note({ note }) {
-  // TO-DO -------------Create PropTypes for note prop
-
-
   // Format the "Last modified" date string
   const date = moment(note.modified).format("do MMM YYYY");
   
@@ -82,6 +80,17 @@ function Note({ note }) {
 
 Note.defaultProps = {
   note: {},
+}
+
+Note.propTypes = {
+  note: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    modified: PropTypes.string,
+    folderName: PropTypes.string,
+    folderId: PropTypes.string,
+    content: PropTypes.string,
+  })
 }
 
 export default Note;

@@ -3,7 +3,6 @@ import App from './App';
 import { notes, folders } from './store-for-tests'
 import { createMemoryHistory } from 'history';
 import { BrowserRouter as Router } from 'react-router-dom';
-// import { Router } from 'react-router-dom';
 import { act, render, fireEvent, cleanup, screen} from '@testing-library/react';
 
 afterEach(cleanup);
@@ -32,30 +31,42 @@ describe('App component', () => {
     await act(() => emptyDataService.getFolderData());
     await act(() => emptyDataService.getNoteData());
   });
-/**
-  test('contains Noteful header', () => {
+
+  test('contains Noteful header', async () => {
     const { getByText } = render(<Router><App  service={emptyDataService}/></Router>);
+ 
+    await act(() => emptyDataService.getFolderData());
+    await act(() => emptyDataService.getNoteData());
+ 
     getByText("Noteful");
   });
 
-  test('contains main content class', () => {
+  test('contains main content class', async () => {
     const { getByRole } = render(<Router><App  service={emptyDataService}/></Router>);
+
+    await act(() => emptyDataService.getFolderData());
+    await act(() => emptyDataService.getNoteData());
+
     expect(getByRole("main")).toHaveClass("App_main-content");
+
+
   });
 
   // TODO: We want to test that clicking on a link updates app someway
-  test('full app rendering/navigating', () => {
+  test('full app rendering/navigating', async () => {
     const history = createMemoryHistory();
     const { container, getByText } = render(
       <Router history={history}>
         <App  service={fakeDataService}/>
       </Router>
     );
-    expect(container.innerHTML).toMatch("Noteful");
-  
+
+    await act(() => emptyDataService.getFolderData());
+    await act(() => emptyDataService.getNoteData());
+
+    expect(container.innerHTML).toMatch("Noteful");  
     fireEvent.click(getByText(/Noteful/i));
     expect(getByText(/Noteful/i).closest('a')).toHaveAttribute('href', '/');
     expect(history.location.pathname).toBe('/')
   });
-/**/
 });
