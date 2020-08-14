@@ -75,3 +75,7 @@ header {
   display: flex;
   justify-content: space-between;
 }
+
+.error-message {
+  color: red;
+}
