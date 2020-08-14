@@ -6,6 +6,10 @@ import Note from './Note';
 function MainPanel() {
   // Get notes array from context; set default value
   const { notes=[] } = useContext(NotefulContext);
+
+  // React.useEffect(() => {
+  //   throw new Error('This is a test');
+  // }, []);
   
   // Make a list of all notes for the "/" path
   const allNotes = notes.map(note => {

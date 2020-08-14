@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { NotefulContext } from './NotefulContext';
 import { routes } from './routes';
+import BoundaryError from './components/BoundaryError';
 
 function App({service}) {
   // TO-DO -------------Create PropTypes for service prop
@@ -54,11 +55,13 @@ function App({service}) {
       </header>
       
       <main className="App_main-content">
+      <BoundaryError>
         <NotefulContext.Provider
           value={notefulContextValues}
         >
           {routes}
         </NotefulContext.Provider>
+      </BoundaryError>
       </main>
     </>
   );

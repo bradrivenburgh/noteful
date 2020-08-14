@@ -1,9 +1,20 @@
-export function getFolderData() {
-  
-  return fetch("http://localhost:9090/folders")
+// Options callback for post calls
+const postOptions = (data) => {
+  return {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(data)
+}}
+
+// Helper function for fetch call
+function fetchCall(url, options) {
+  return fetch(url, options)
   .then(response => {
     if (!response.ok) {
-      throw new Error(response.statusText)
+      const error = new Error(response.statusText)
+      throw error;
     }
     return response.json();
   })
@@ -11,61 +22,22 @@ export function getFolderData() {
     return data;
   })
   .catch(error => {
-    console.log(error.message)
+    throw error;
   });
+}
 
+export function getFolderData() {
+  return fetchCall("http://localhost:9090/folders", {})
 }
 
 export function getNoteData() {
-  return fetch("http://localhost:9090/notes")
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(response.statusText)
-    }
-    return response.json();
-  })
-  .then(data => {
-    return data;
-  })
-  .catch(error => {
-    console.log(error.message)
-  });
+  return fetchCall("http://localhost:9090/notes", {})
 }
 
 export function postFolderData(data) {
-  fetch("http://localhost:9090/folders", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(response.statusText)
-    }
-    return response.json();
-  })
-  .catch(error => {
-    console.log(error.message)
-  });
+  return fetchCall("http://localhost:9090/folders", postOptions(data))
 }
 
 export function postNoteData(data) {
-  fetch("http://localhost:9090/notes", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(response.statusText)
-    }
-    return response.json();
-  })
-  .catch(error => {
-    console.log(error.message)
-  });
+  return fetchCall("http://localhost:9090/notes", postOptions(data))
 }
