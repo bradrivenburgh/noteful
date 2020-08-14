@@ -3,7 +3,7 @@ import App from './App';
 import { notes, folders } from './store-for-tests'
 import { createMemoryHistory } from 'history';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { act, render, fireEvent, cleanup, screen} from '@testing-library/react';
+import { act, render, fireEvent, cleanup} from '@testing-library/react';
 
 afterEach(cleanup);
 
