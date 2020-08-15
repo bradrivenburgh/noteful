@@ -32,7 +32,7 @@ function FolderPanel() {
           activeClassName="selected"
           onClick={() => setSelectedFolder(folder)}
         >
-          <h4>{folder.name}</h4>
+          <p>{folder.name}</p>
         </NavLink>
       </li>
     );
