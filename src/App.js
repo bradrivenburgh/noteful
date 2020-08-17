@@ -66,7 +66,6 @@ function App({service}) {
 }
 
 App.propTypes = {
-  //service: PropTypes.object.isRequired
   service: PropTypes.shape({
     getFolderData: PropTypes.func.isRequired,
     getNoteData: PropTypes.func.isRequired,

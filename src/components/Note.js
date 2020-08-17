@@ -90,7 +90,7 @@ Note.propTypes = {
     folderName: PropTypes.string,
     folderId: PropTypes.string,
     content: PropTypes.string,
-  })
+  }).isRequired
 }
 
 export default Note;
