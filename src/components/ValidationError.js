@@ -11,6 +11,10 @@ export default function ValidationError(props) {
   return <></>
 }
 
+ValidationError.defaultProps = {
+  message: ""
+}
+
 ValidationError.propTypes = {
   message: PropTypes.string.isRequired
 }
