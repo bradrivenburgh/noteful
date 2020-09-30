@@ -22,14 +22,16 @@ function AddNote() {
 
   const handleChange = (e) => {
     const {type, name, value} = e.target;
-    const folder = folders.find(element => element.name === value);
-    type === "select-one" 
+    const folder = folders.find(element => element.name === value);    
+    type === "select-one" && value
     ? setFormData({ ...formData, [name]: value, folderId: folder.id})
     : setFormData({ ...formData, [name]: value});
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Delete folderName from note object bc it is not part of the data scheme
+    delete formData.folderName; 
     postNoteData(formData);
     setSelectedFolder({});
     history.goBack();
@@ -44,7 +46,7 @@ function AddNote() {
 
   const validateFolder = () => {
     const folder = formData.folderName;
-    if (folder.length === 0) {
+    if (!folder || folder.length === 0) {
       return 'A folder must be selected';
     }
   }
@@ -58,45 +60,50 @@ function AddNote() {
     </option>
     )
 
-  return(
-    <form className="add-note" onSubmit={(e) => handleSubmit(e)}>
-      <label htmlFor="name">Title: </label>
-        <input 
-          type="text" 
-          name="name" 
-          id="name"
-          value={formData.name}
-          onChange={(e) => handleChange(e)}
-        />
-      {formData.name.length === 0 && <ValidationError message={validateName()} />}
+  return (
+    <form className='add-note' onSubmit={(e) => handleSubmit(e)}>
+      <label htmlFor='name'>Title: </label>
+      <input
+        type='text'
+        name='name'
+        id='name'
+        value={formData.name}
+        onChange={(e) => handleChange(e)}
+      />
+      {formData.name.length === 0 && (
+        <ValidationError message={validateName()} />
+      )}
       <br />
-      <label htmlFor="name">Content: </label>
-        <textarea 
-          type="text" 
-          name="content" 
-          id="content"
-          value={formData.content}
-          onChange={(e) => handleChange(e)}
-        />
-        <br />
-        <label htmlFor="folder">Folder: </label>
-          <select
-            name="folderName" 
-            value={formData.folderName} 
-            onChange={(e) => handleChange(e)}
-          >
-            {folderOptions}
-          </select>
-          {formData.folderName.length === 0 && <ValidationError message={validateFolder()} />}
+      <label htmlFor='name'>Content: </label>
+      <textarea
+        type='text'
+        name='content'
+        id='content'
+        value={formData.content}
+        onChange={(e) => handleChange(e)}
+      />
+      <br />
+      <label htmlFor='folder'>Folder: </label>
+      <select
+        name='folderName'
+        value={formData.folderName}
+        onChange={(e) => handleChange(e)}>
+       
+        <option value={null} />
+        {folderOptions}
+        
+      </select>
+      {!formData.folderName && (
+        <ValidationError message={validateFolder()} />
+      )}
 
-        <br />
-          <button type="button" onClick={() => history.goBack()}>Cancel</button>
-          <button 
-            type="submit"
-            disabled={validateName() || validateFolder()}
-          >
-            Submit
-          </button>
+      <br />
+      <button type='button' onClick={() => history.goBack()}>
+        Cancel
+      </button>
+      <button type='submit' disabled={validateName() || validateFolder()}>
+        Submit
+      </button>
     </form>
   );
 }
