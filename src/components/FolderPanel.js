@@ -7,9 +7,9 @@ function FolderPanel() {
   const {folders=[], selectedNote, setSelectedNote, setSelectedFolder} = useContext(NotefulContext);
 
   // Pull the selectedNote value from context and and find the matching
-  // folderId in the folders array; for the "note/:noteId" path
+  // folder_id in the folders array; for the "note/:noteId" path
   let singleFolder = folders
-    .find(folder => folder.id === selectedNote.folderId) || {};
+    .find(folder => folder.id === selectedNote.folder_id) || {};
 
   // Get the history for the goBack() functionality for the 
   // "Go Back" button; for the "/notes/:noteId" path
@@ -32,7 +32,7 @@ function FolderPanel() {
           activeClassName="selected"
           onClick={() => setSelectedFolder(folder)}
         >
-          <p>{folder.name}</p>
+          <p>{folder.folder_name}</p>
         </NavLink>
       </li>
     );
@@ -42,7 +42,7 @@ function FolderPanel() {
   const noteView = (
     <>
       <button onClick={handleClick}>Go Back</button>
-      <h2>{singleFolder.name}</h2>
+      <h2>{singleFolder.folder_name}</h2>
     </>
   );
 

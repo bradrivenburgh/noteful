@@ -9,11 +9,10 @@ function AddNote() {
   // Get selectedFolder state and setter function from Context
   const {selectedFolder, setSelectedFolder, folders} = useContext(NotefulContext);
   const [formData, setFormData] = useState({
-    id: "", 
-    name: "",
+    note_name: "",
     modified: new Date(),
-    folderName: selectedFolder.name || "",
-    folderId: `${selectedFolder.id}` || "",
+    folder_name: selectedFolder.name || "",
+    folder_id: `${selectedFolder.id}` || "",
     content: "",
   });
 
@@ -22,30 +21,30 @@ function AddNote() {
 
   const handleChange = (e) => {
     const {type, name, value} = e.target;
-    const folder = folders.find(element => element.name === value);    
+    const folder = folders.find(folder => folder.folder_name === value);    
     type === "select-one" && value
-    ? setFormData({ ...formData, [name]: value, folderId: folder.id})
+    ? setFormData({ ...formData, [name]: value, folder_id: folder.id})
     : setFormData({ ...formData, [name]: value});
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Delete folderName from note object bc it is not part of the data scheme
-    delete formData.folderName; 
+    // Delete folder_name from note object bc it is not part of the data scheme
+    delete formData.folder_name; 
     postNoteData(formData);
     setSelectedFolder({});
     history.goBack();
   }
 
   const validateName = () => {
-    const name = formData.name.trim();
+    const name = formData.note_name.trim();
     if (name.length === 0) {
-      return 'A note title is required';
+      return 'A note name is required';
     }
   }
 
   const validateFolder = () => {
-    const folder = formData.folderName;
+    const folder = formData.folder_name;
     if (!folder || folder.length === 0) {
       return 'A folder must be selected';
     }
@@ -54,23 +53,23 @@ function AddNote() {
   const folderOptions = folders.map(folder => 
     <option 
       key={folder.id}
-      value={folder.name}
+      value={folder.folder_name}
     >
-      {folder.name}
+      {folder.folder_name}
     </option>
     )
 
   return (
     <form className='add-note' onSubmit={(e) => handleSubmit(e)}>
-      <label htmlFor='name'>Title: </label>
+      <label htmlFor='name'>Name: </label>
       <input
         type='text'
-        name='name'
-        id='name'
-        value={formData.name}
+        name='note_name'
+        id='note_name'
+        value={formData.note_name}
         onChange={(e) => handleChange(e)}
       />
-      {formData.name.length === 0 && (
+      {formData.note_name.length === 0 && (
         <ValidationError message={validateName()} />
       )}
       <br />
@@ -85,15 +84,15 @@ function AddNote() {
       <br />
       <label htmlFor='folder'>Folder: </label>
       <select
-        name='folderName'
-        value={formData.folderName}
+        name='folder_name'
+        value={formData.folder_name}
         onChange={(e) => handleChange(e)}>
        
         <option value={null} />
         {folderOptions}
         
       </select>
-      {!formData.folderName && (
+      {!formData.folder_name && (
         <ValidationError message={validateFolder()} />
       )}
 

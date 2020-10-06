@@ -24,7 +24,7 @@ function MainPanel() {
   // Create a list of filtered notes based on the folder.id of
   // the selected folder for the "folders/:foldersId" path
   const filteredByFolderId = notes
-    .filter(note => note.folderId === params.folderId) || []
+    .filter(note => note.folder_id === parseInt(params.folderId)) || []
   const filteredNotes = filteredByFolderId.map(note => {
     return (
       <li key={note.id}>
@@ -38,7 +38,7 @@ function MainPanel() {
   // Return only the note that was clicked on for the
   // "/notes/:noteId" path
   const singleNote = notes
-    .find(note => note.id === params.noteId) || {};
+    .find(note => note.id === parseInt(params.noteId)) || {};
   
   // Get the pathname to help control the view
   let {pathname} = useLocation();

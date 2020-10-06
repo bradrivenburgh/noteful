@@ -19,7 +19,7 @@ function Note({ note }) {
   const history = useHistory();
 
   const handleDeleteNote = (noteId, cb) => {
-    fetch(`http://localhost:9090/notes/${noteId}`, {
+    fetch(`http://localhost:8000/api/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -31,7 +31,7 @@ function Note({ note }) {
           throw error
         });
       }
-      return response.json();
+     // return response.json();
     })
     .then(data => cb(noteId))
     .catch(error => console.error(error))
@@ -45,13 +45,13 @@ function Note({ note }) {
   const {pathname} = useLocation();
   const safeLink = (
       pathname === `/notes/${note.id}`
-      ? <h2>{note.name}</h2>
+      ? <h2>{note.note_name}</h2>
       : (
         <Link 
           to={`/notes/${note.id}`} 
           onClick={() => handleClick(note)}
         >
-          <h2>{note.name}</h2>
+          <h2>{note.note_name}</h2>
         </Link>
         )
   );
@@ -68,7 +68,7 @@ function Note({ note }) {
               setSelectedNote({})
               history.push("/")
             }
-            handleDeleteNote(note.id,deleteNote)
+            handleDeleteNote(note.id, deleteNote)
           }}
         >
           Delete Note

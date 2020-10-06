@@ -9,8 +9,7 @@ function AddFolder() {
   // Get selectedFolder state and setter function from Context
   const {setSelectedFolder} = useContext(NotefulContext);
   const [formData, setFormData] = useState({
-    id: "", 
-    name: "",
+    folder_name: "",
   });
 
   // Get history from react-router to redirect to root path
@@ -30,7 +29,7 @@ function AddFolder() {
   }
 
   const validateName = () => {
-    const name = formData.name.trim();
+    const name = formData.folder_name.trim();
     if (name.length === 0) {
       return 'Folder name is required';
     }
@@ -38,15 +37,15 @@ function AddFolder() {
 
   return(
     <form className="add-folder" onSubmit={(e) => handleSubmit(e)}>
-      <label htmlFor="name">Folder Name: </label>
+      <label htmlFor="folder_name">Folder Name: </label>
         <input 
           type="text" 
-          name="name" 
-          id="name"
-          value={formData.name}
+          name="folder_name" 
+          id="folder_name"
+          value={formData.folder_name}
           onChange={(e) => handleChange(e)}
         />
-      {formData.name.length >= 0 && <ValidationError message={validateName()} />}        
+      {formData.folder_name.length >= 0 && <ValidationError message={validateName()} />}        
       <br />
           <button type="button" onClick={() => history.goBack()}>Cancel</button>
           <button type="submit" disabled={validateName()}>Submit</button>
