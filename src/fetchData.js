@@ -27,21 +27,21 @@ function fetchCall(url, options) {
 }
 
 export function getFolderData() {
-  return fetchCall("http://localhost:9090/folders", 
+  return fetchCall("http://localhost:8000/api/folders", 
     {})
 }
 
 export function getNoteData() {
-  return fetchCall("http://localhost:9090/notes", 
+  return fetchCall("http://localhost:8000/api/notes", 
    {})
 }
 
 export function postFolderData(data) {
-  return fetchCall("http://localhost:9090/folders", 
+  return fetchCall("http://localhost:8000/api/folders", 
    postOptions(data))
 }
 
 export function postNoteData(data) {
-  return fetchCall("http://localhost:9090/notes", 
+  return fetchCall("http://localhost:8000/api/notes", 
     postOptions(data))
 }
