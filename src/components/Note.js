@@ -84,11 +84,11 @@ Note.defaultProps = {
 
 Note.propTypes = {
   note: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     modified: PropTypes.string,
     folderName: PropTypes.string,
-    folderId: PropTypes.string,
+    folderId: PropTypes.number,
     content: PropTypes.string,
   }).isRequired
 }
