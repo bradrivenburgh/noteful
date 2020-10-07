@@ -22,9 +22,9 @@ function MainPanel() {
   let params = useParams();
 
   // Create a list of filtered notes based on the folder.id of
-  // the selected folder for the "folders/:foldersId" path
+  // the selected folder for the "folders/:folderId" path
   const filteredByFolderId = notes
-    .filter(note => note.folder_id === parseInt(params.folderId)) || []
+    .filter(note => note.folderId === parseInt(params.folderId)) || []
   const filteredNotes = filteredByFolderId.map(note => {
     return (
       <li key={note.id}>

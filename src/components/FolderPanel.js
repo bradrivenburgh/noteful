@@ -7,9 +7,9 @@ function FolderPanel() {
   const {folders=[], selectedNote, setSelectedNote, setSelectedFolder} = useContext(NotefulContext);
 
   // Pull the selectedNote value from context and and find the matching
-  // folder_id in the folders array; for the "note/:noteId" path
+  // folderId in the folders array; for the "note/:noteId" path
   let singleFolder = folders
-    .find(folder => folder.id === selectedNote.folder_id) || {};
+    .find(folder => folder.id === selectedNote.folderId) || {};
 
   // Get the history for the goBack() functionality for the 
   // "Go Back" button; for the "/notes/:noteId" path
@@ -23,7 +23,7 @@ function FolderPanel() {
     history.goBack();
   }
 
-  // The view for the "/" path
+  // The view for the "/" and "/folders/:folderId" path
   const allFolders = folders.map(folder => {
     return (
       <li key={folder.id} className="FolderPanel_folder-item" >
@@ -32,17 +32,26 @@ function FolderPanel() {
           activeClassName="selected"
           onClick={() => setSelectedFolder(folder)}
         >
-          <p>{folder.folder_name}</p>
+          <p>{folder.folderName}</p>
         </NavLink>
       </li>
     );
   }) || [];
+
+  const defaultView = (
+    <>
+      {allFolders}
+      <Link to="/add-folder" >
+        <button>Add Folder</button>
+      </Link>
+    </>
+  )
   
   // The view for the "notes/:noteId" path
-  const noteView = (
+  const singleNoteView = (
     <>
       <button onClick={handleClick}>Go Back</button>
-      <h2>{singleFolder.folder_name}</h2>
+      <h2>{singleFolder.folderName}</h2>
     </>
   );
 
@@ -53,13 +62,10 @@ function FolderPanel() {
     <section className="FolderPanel_main-view">
       <ul className="FolderPanel_folder-list">
         {Object.keys(singleFolder).length
-        ? noteView
-        : allFolders}
+        ? singleNoteView
+        : defaultView}
 
       </ul>
-      <Link to="/add-folder" >
-        <button>Add Folder</button>
-      </Link>
     </section>
   );
 }

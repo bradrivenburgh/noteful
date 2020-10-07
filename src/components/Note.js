@@ -45,13 +45,13 @@ function Note({ note }) {
   const {pathname} = useLocation();
   const safeLink = (
       pathname === `/notes/${note.id}`
-      ? <h2>{note.note_name}</h2>
+      ? <h2>{note.noteName}</h2>
       : (
         <Link 
           to={`/notes/${note.id}`} 
           onClick={() => handleClick(note)}
         >
-          <h2>{note.note_name}</h2>
+          <h2>{note.noteName}</h2>
         </Link>
         )
   );
