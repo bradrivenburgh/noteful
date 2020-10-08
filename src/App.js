@@ -17,8 +17,17 @@ function App({service}) {
   // setter functions; new fetch calls are made whenever
   // the pathname changes in order to keep the notes current
   useEffect(() => {
-     service.getFolderData().then(data => setFolders(data));
-     service.getNoteData().then(data => setNotes(data));
+    Promise.all([
+      service.getFolderData(),
+      service.getNoteData()
+    ])
+    .then(([foldersRes, notesRes]) => {
+      setFolders(foldersRes);
+      setNotes(notesRes);
+    })
+    .catch(error => 
+      console.log(error)
+    )
   }, [service, pathname]);
 
   const deleteNote = (noteId) => {

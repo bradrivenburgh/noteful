@@ -12,7 +12,7 @@ function AddNote() {
     noteName: "",
     modified: new Date(),
     folderName: selectedFolder.folderName || "",
-    folderId: selectedFolder.folderId || "",
+    folderId: selectedFolder.id || "",
     content: "",
   });
 
@@ -30,7 +30,7 @@ function AddNote() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Delete folderName from note object bc it is not part of the data scheme
-    delete formData.folderName; 
+    delete formData.folderName;
     postNoteData(formData);
     setSelectedFolder({});
     history.goBack();

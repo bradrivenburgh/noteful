@@ -1,9 +1,13 @@
+require('dotenv').config();
+const { API_URL } = require('./config')
+
 // Options callback for post calls
 const postOptions = (data) => {
   return {
   method: "POST",
   headers: {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "Accept": 'application/json'
   },
   body: JSON.stringify(data)
 }}
@@ -27,21 +31,22 @@ function fetchCall(url, options) {
 }
 
 export function getFolderData() {
-  return fetchCall("http://localhost:8000/api/noteful/folders", 
+  console.log(API_URL)
+  return fetchCall(`${API_URL}/folders`, 
     {})
 }
 
 export function getNoteData() {
-  return fetchCall("http://localhost:8000/api/noteful/notes", 
+  return fetchCall(`${API_URL}/notes`, 
    {})
 }
 
 export function postFolderData(data) {
-  return fetchCall("http://localhost:8000/api/noteful/folders", 
+  return fetchCall(`${API_URL}/folders`, 
    postOptions(data))
 }
 
 export function postNoteData(data) {
-  return fetchCall("http://localhost:8000/api/noteful/notes", 
+  return fetchCall(`${API_URL}/notes`, 
     postOptions(data))
 }
