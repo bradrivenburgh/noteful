@@ -55,7 +55,7 @@ function FolderPanel() {
     </>
   );
 
-  // Only display noteView (with folder name displayed and go back
+  // Only display singleNoteView (with folder name displayed and go back
   // button in place) if the user clicked on a note that were filtered by
   // folderId 
   return (

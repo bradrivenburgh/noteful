@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
+import moment from 'moment';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { NotefulContext } from '../NotefulContext';
-import moment from 'moment';
 import PropTypes from 'prop-types';
+import { deleteNoteData } from '../fetchData';
 
 function Note({ note }) {
   // Format the "Last modified" date string
@@ -18,23 +19,10 @@ function Note({ note }) {
   // "/" path when a note is deleted
   const history = useHistory();
 
-  const handleDeleteNote = (noteId, cb) => {
-    fetch(`http://localhost:8000/api/notes/${noteId}`, {
-      method: 'DELETE',
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-    .then(response => {
-      if (!response.ok) {
-        return response.json().then(error => {
-          throw error
-        });
-      }
-     // return response.json();
-    })
-    .then(data => cb(noteId))
-    .catch(error => console.error(error))
+  const handleDeleteNote = (noteId, cb, deleteFetch) => {
+     deleteFetch(noteId)
+      .then(data => cb(noteId))
+      .catch(error => console.log(error))
   }
 
   // Get the current path name to create a conditional
@@ -68,11 +56,21 @@ function Note({ note }) {
               setSelectedNote({})
               history.push("/")
             }
-            handleDeleteNote(note.id, deleteNote)
+            handleDeleteNote(note.id, deleteNote, deleteNoteData)
           }}
         >
           Delete Note
         </button>
+        <Link to="/edit-note">
+          <button
+            onClick={() => {
+                setSelectedNote(note)
+            }}
+          >
+            Edit Note
+          </button>
+        </Link>
+
       </div>
     </div>
   );
