@@ -53,8 +53,14 @@ button {
   border: 1px solid black;
   padding: 1em;
   display: flex;
-  flex-direction: column;
-  align-content: space-around;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  }
+
+.FolderPanel_button {
+  width: 8em;
+  padding: .2em
 }
 
 .selected {

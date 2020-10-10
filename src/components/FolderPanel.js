@@ -1,10 +1,20 @@
 import React, { useContext } from 'react';
 import { NotefulContext } from '../NotefulContext'
-import { NavLink, Link, useHistory } from 'react-router-dom';
+import { NavLink, Link, useHistory, useLocation } from 'react-router-dom';
+import { deleteFolderData } from '../fetchData';
 
 function FolderPanel() {
   // Get state data from context
-  const {folders=[], selectedNote, setSelectedNote, setSelectedFolder} = useContext(NotefulContext);
+  const {
+    folders=[], 
+    selectedNote, 
+    setSelectedNote, 
+    setSelectedFolder,
+    deleteFolder
+  } = useContext(NotefulContext);
+
+  const {pathname} = useLocation();
+
 
   // Pull the selectedNote value from context and and find the matching
   // folderId in the folders array; for the "note/:noteId" path
@@ -34,6 +44,20 @@ function FolderPanel() {
         >
           <p>{folder.folderName}</p>
         </NavLink>
+        <button
+            className="FolderPanel_button"
+            onClick={() => {
+              if (pathname === `/folders/${folder.id}`) {
+                setSelectedFolder({})
+                history.push("/")
+              }
+              handleDeleteFolder(folder.id, deleteFolder, deleteFolderData)
+            }}
+          >
+            Delete Folder
+          </button>
+
+
       </li>
     );
   }) || [];
@@ -54,6 +78,12 @@ function FolderPanel() {
       <h2>{singleFolder.folderName}</h2>
     </>
   );
+
+  const handleDeleteFolder = (folderId, cb, deleteFetch) => {
+    deleteFetch(folderId)
+     .then(data => cb(folderId))
+     .catch(error => console.log(error))
+ }
 
   // Only display singleNoteView (with folder name displayed and go back
   // button in place) if the user clicked on a note that were filtered by

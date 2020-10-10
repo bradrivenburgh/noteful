@@ -73,6 +73,11 @@ export function postFolderData(data) {
    postOptions(data))
 }
 
+export function deleteFolderData(folderId) {
+  return fetchCall(`${API_ENDPOINT}/folders/${folderId}`,
+  deleteOptions)
+}
+
 export function postNoteData(data) {
   return fetchCall(`${API_ENDPOINT}/notes`, 
     postOptions(data))
