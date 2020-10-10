@@ -49,7 +49,6 @@ function fetchCall(url, options) {
 }
 
 export function getFolderData() {
-  console.log(API_URL)
   return fetchCall(`${API_URL}/folders`, 
     {})
 }

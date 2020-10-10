@@ -44,33 +44,39 @@ function Note({ note }) {
         )
   );
   return (
-    <div className="Note_note-item">
-      {safeLink}
-      <div 
-        className="Note_note-item_button-layout"
-      >
-        <span>Last modified on {date} </span>
-        <button
-          onClick={() => {
-            if (pathname === `/notes/${note.id}`) {
-              setSelectedNote({})
-              history.push("/")
-            }
-            handleDeleteNote(note.id, deleteNote, deleteNoteData)
-          }}
-        >
-          Delete Note
-        </button>
-        <Link to="/edit-note">
+    <div className="Note_note-item-container">
+      <div>
+        {safeLink}
+      </div>
+
+      <div className="Note_button-date-container">
+        <div>
+            <span>Last modified on {date} </span>
+        </div>
+        <div>
           <button
+            className="Note_button"
             onClick={() => {
-                setSelectedNote(note)
+              if (pathname === `/notes/${note.id}`) {
+                setSelectedNote({})
+                history.push("/")
+              }
+              handleDeleteNote(note.id, deleteNote, deleteNoteData)
             }}
           >
-            Edit Note
+            Delete Note
           </button>
-        </Link>
-
+          <Link to="/edit-note">
+            <button
+              className="Note_button"
+              onClick={() => {
+                  setSelectedNote(note)
+              }}
+            >
+              Edit Note
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );
