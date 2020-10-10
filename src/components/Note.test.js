@@ -21,7 +21,7 @@ describe('Note component', () => {
   
   it('has a Delete Note button', () => {
     render(<Router><Note /></Router>);
-    expect(screen.getByRole('button')).toBeInTheDocument();
+    expect(screen.getAllByRole('button')).toBeTrue();
   });
 
   it('has a Note with content', () => {

@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { API_URL } = require('./config');
+const { API_ENDPOINT } = require('./config');
 
 // Options callback for post calls
 const postOptions = (data = {}) => {
@@ -49,31 +49,31 @@ function fetchCall(url, options) {
 }
 
 export function getFolderData() {
-  return fetchCall(`${API_URL}/folders`, 
+  return fetchCall(`${API_ENDPOINT}/folders`, 
     {})
 }
 
 export function getNoteData() {
-  return fetchCall(`${API_URL}/notes`, 
+  return fetchCall(`${API_ENDPOINT}/notes`, 
    {})
 }
 
 export function postFolderData(data) {
-  return fetchCall(`${API_URL}/folders`, 
+  return fetchCall(`${API_ENDPOINT}/folders`, 
    postOptions(data))
 }
 
 export function postNoteData(data) {
-  return fetchCall(`${API_URL}/notes`, 
+  return fetchCall(`${API_ENDPOINT}/notes`, 
     postOptions(data))
 }
 
 export function deleteNoteData(noteId) {
-  return fetchCall(`${API_URL}/notes/${noteId}`,
+  return fetchCall(`${API_ENDPOINT}/notes/${noteId}`,
   deleteOptions)
 }
 
 export function patchNoteData(noteId, data) {
-  return fetchCall(`${API_URL}/notes/${noteId}`,
+  return fetchCall(`${API_ENDPOINT}/notes/${noteId}`,
   patchOptions(data))
 }
