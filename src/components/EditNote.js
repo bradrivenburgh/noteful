@@ -41,9 +41,9 @@ function EditNote() {
     // Delete folderName from note object bc it is not part of the data scheme
     delete formData.folderName;
     patchNoteData(selectedNote.id, formData);
+    history.push(`/folders/${selectedNote.folderId}`);
     setSelectedFolder({});
     setSelectedNote({});
-    history.push("/");
   }
 
   const validateName = () => {

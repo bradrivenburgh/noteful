@@ -5,9 +5,10 @@ import { postNoteData } from '../fetchData';
 import ValidationError from '../components/ValidationError';
 
 function AddNote() {
-  // Set form state; the note id is automatically assigned by server
   // Get selectedFolder state and setter function from Context
-  const {selectedFolder, setSelectedFolder, folders} = useContext(NotefulContext);
+  const {selectedFolder, folders} = useContext(NotefulContext);
+
+  // Set form state; the note id is automatically assigned by server
   const [formData, setFormData] = useState({
     noteName: "",
     modified: new Date(),
@@ -32,7 +33,6 @@ function AddNote() {
     // Delete folderName from note object bc it is not part of the data scheme
     delete formData.folderName;
     postNoteData(formData);
-    setSelectedFolder({});
     history.goBack();
   }
 

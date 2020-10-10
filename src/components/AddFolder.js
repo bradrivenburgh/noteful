@@ -37,7 +37,7 @@ function AddFolder() {
 
   return(
     <form className="add-folder" onSubmit={(e) => handleSubmit(e)}>
-      <label htmlFor="folderName">Folder Name: </label>
+      <label htmlFor="folderName">Name: </label>
         <input 
           type="text" 
           name="folderName" 

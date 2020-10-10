@@ -40,6 +40,10 @@ function App({service}) {
     const foldersPostDelete = folders
       .filter(folder => folder.id !== folderId);
     setFolders(foldersPostDelete);
+
+    const notesPostDelete = notes
+      .filter(note => note.folderId !== folderId);
+    setNotes(notesPostDelete);
   }
 
   // Values to be provided to the NotefulContext.Provider

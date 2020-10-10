@@ -5,6 +5,7 @@ import MainPanel from './components/MainPanel';
 import AddNote from './components/AddNote';
 import AddFolder from './components/AddFolder';
 import EditNote from './components/EditNote';
+import EditFolder from './components/EditFolder';
 
   export const routes = 
     <Switch>
@@ -24,6 +25,9 @@ import EditNote from './components/EditNote';
       </Route>
       <Route path="/edit-note">
         <EditNote />
+      </Route> 
+      <Route path="/edit-folder">
+        <EditFolder />
       </Route> 
       <Route path="/">
         <FolderPanel />

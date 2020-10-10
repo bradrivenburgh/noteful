@@ -56,8 +56,16 @@ function FolderPanel() {
           >
             Delete Folder
           </button>
-
-
+          <Link to="/edit-folder">
+            <button
+              className="Folder_button"
+              onClick={() => {
+                  setSelectedFolder(folder)
+              }}
+            >
+              Edit Folder
+            </button>
+          </Link>
       </li>
     );
   }) || [];
