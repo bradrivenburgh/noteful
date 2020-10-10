@@ -1,12 +1,13 @@
 require('dotenv').config();
-const { API_ENDPOINT } = require('./config');
+const { API_ENDPOINT, API_KEY } = require('./config');
 
 // Options callback for post calls
 const postOptions = (data = {}) => {
   return {
   method: "POST",
   headers: {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    'Authorization': `Bearer ${API_KEY}`
   },
   body: JSON.stringify(data)
 }};
@@ -21,7 +22,8 @@ const patchOptions = (data) => {
 const deleteOptions = {  
   method: "DELETE",
   headers: {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    'Authorization': `Bearer ${API_KEY}`
   }
 };
 
