@@ -58,9 +58,15 @@ button {
   align-items: center;
   }
 
+.FolderPanel_button-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .FolderPanel_button {
-  width: 8em;
-  padding: .2em
+  width: 7em;
+  padding: .2em;
+  margin: .5em 0 0 .5em;
 }
 
 .selected {
@@ -90,11 +96,35 @@ button {
   align-items: center;
 }
 
+.Note_button-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .Note_button {
-  padding: .5em;
-  margin: 0 0 0 .5em;
+  width: 7em;
+  padding: .2em;
+  margin: .5em 0 0 .5em;
 }
 
 .error-message {
   color: red;
+}
+
+@media all and (max-width: 450px) {
+  .App_main-content {
+    flex-direction: column;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .Note_button-container {
+    flex-direction: row;
+  }
+}
+
+@media all and (min-width: 1150px) {
+  .FolderPanel_button-container {
+    flex-direction: row;
+  }
 }

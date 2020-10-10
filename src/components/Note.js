@@ -53,7 +53,7 @@ function Note({ note }) {
         <div>
             <span>Last modified on {date} </span>
         </div>
-        <div>
+        <div className="Note_button-container">
           <button
             className="Note_button"
             onClick={() => {

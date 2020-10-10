@@ -44,7 +44,8 @@ function FolderPanel() {
         >
           <p>{folder.folderName}</p>
         </NavLink>
-        <button
+        <div className="FolderPanel_button-container">
+          <button
             className="FolderPanel_button"
             onClick={() => {
               if (pathname === `/folders/${folder.id}`) {
@@ -58,7 +59,7 @@ function FolderPanel() {
           </button>
           <Link to="/edit-folder">
             <button
-              className="Folder_button"
+              className="FolderPanel_button"
               onClick={() => {
                   setSelectedFolder(folder)
               }}
@@ -66,6 +67,7 @@ function FolderPanel() {
               Edit Folder
             </button>
           </Link>
+        </div>
       </li>
     );
   }) || [];
