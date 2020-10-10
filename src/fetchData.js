@@ -1,5 +1,5 @@
-require('dotenv').config();
-const { API_ENDPOINT, API_KEY } = require('./config');
+import config from './config';
+const { API_ENDPOINT, API_KEY } = config;
 
 // Options callback for post calls
 const postOptions = (data = {}) => {
@@ -7,7 +7,7 @@ const postOptions = (data = {}) => {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
-    'Authorization': `Bearer ${API_KEY}`
+    "Authorization": `Bearer ${API_KEY}`
   },
   body: JSON.stringify(data)
 }};
@@ -23,7 +23,7 @@ const deleteOptions = {
   method: "DELETE",
   headers: {
     "Content-Type": "application/json",
-    'Authorization': `Bearer ${API_KEY}`
+    "Authorization": `Bearer ${API_KEY}`
   }
 };
 
@@ -52,12 +52,20 @@ function fetchCall(url, options) {
 
 export function getFolderData() {
   return fetchCall(`${API_ENDPOINT}/folders`, 
-    {})
+    {
+      headers: {
+        "Authorization": `Bearer ${API_KEY}`
+      }
+    })
 }
 
 export function getNoteData() {
   return fetchCall(`${API_ENDPOINT}/notes`, 
-   {})
+   {
+    headers: {
+      "Authorization": `Bearer ${API_KEY}`
+    }
+   })
 }
 
 export function postFolderData(data) {

@@ -1,4 +1,4 @@
-module.exports = {
-  API_ENDPOINT: process.env.API_ENDPOINT || 'http://localhost:8000/api/noteful',
-  API_KEY: process.env.API_KEY
+export default {
+  API_ENDPOINT: process.env.REACT_APP_API_ENDPOINT || "https://vast-caverns-17279.herokuapp.com/api/noteful",
+  API_KEY: process.env.REACT_APP_API_KEY
 }
